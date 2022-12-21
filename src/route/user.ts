@@ -66,6 +66,40 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+router.get('/profile/:username', async (req, res) => {
+    try {
+        res.setHeader('Content-Type', 'application/json; charset=utf-8');
+        let user = await AppDataSource.manager.findOneBy(BlogUser, {
+            username: req.params.username
+        });
+        if (user) {
+            res.send({
+                code: 'ok',
+                data: {
+                    id: user.id,
+                    flags: user.flags,
+                    username: user.username,
+                    avatar: user.avatar,
+                    signature: user.signature
+                }
+            });
+            return;
+        }
+
+        res.send({
+            code: 'not ok',
+            message: '用户不存在。'
+        });
+        return;
+    } catch (err) {
+        console.log(err);
+        res.send({
+            code: 'not ok',
+            message: '服务端获取用户信息出错。'
+        });
+    }
+});
+
 router.post('/register', async (req, res) => {
     try {
         res.setHeader('Content-Type', 'application/json; charset=utf-8');
@@ -221,6 +255,7 @@ router.put('/', async (req, res) => {
 
 router.put('/avatar', async (req, res) => {
     try {
+        res.setHeader('Content-Type', 'application/json; charset=utf-8');
         if (!req.payload?.userId) {
             res.send({
                 code: 'not ok',
@@ -272,6 +307,17 @@ router.put('/avatar', async (req, res) => {
         })
     }
 });
+
+router.post('/signoff', (req, res) => {
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
+    res.cookie('user', '', {
+        maxAge: 0
+    });
+    res.send({
+        code: 'ok',
+        message: '注销完成'
+    })
+})
 
 export {
     router as userRoute
