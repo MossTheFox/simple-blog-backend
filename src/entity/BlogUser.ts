@@ -15,11 +15,10 @@ export class BlogUser {
     })
     username: string;
 
-    /** Hashed */
+    /** TODO: Hashed */
     @Column()
     password: string;
 
-    /** [].join(',') */
     @Column('simple-array', {
         nullable: true
     })

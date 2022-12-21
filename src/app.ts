@@ -40,6 +40,7 @@ app.use('/comment', blogCommentRouter);
 ///////////////////////////////////////////////////////
 // ⚠ React Router 行为。请留意
 app.get('*', (req, res) => res.sendFile(path.resolve('public', 'index.html')));
+
 // 404 Handler
 app.use(function (req, res, next) {
     res.setHeader("content-type", "application/json; charset=utf-8")
