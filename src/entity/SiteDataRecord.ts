@@ -1,15 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from "typeorm";
+import { Entity, PrimaryColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from "typeorm";
 
-const siteConfigTypes = ['cat', 'tag', 'config'] as const;
+const siteConfigTypes = ['catList', 'tagList', 'unknown'] as const;
 
 @Entity()
 export class SiteDataRecord {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
 
-    @Column('text')
+    @PrimaryColumn('text')
     type: typeof siteConfigTypes[number];
 
+    /** Might be json if is cat list or tag list */
     @Column('text')
     data: string;
 

@@ -5,6 +5,8 @@ import cookieParser from "cookie-parser";
 import { SERVER_PORT } from "./constraint";
 import { AppDataSource } from "./data-source";
 import { userRoute } from "./route/user";
+import { blogRoute } from "./route/blog";
+import { blogCommentRouter } from "./route/blogComment";
 
 const app = express();
 
@@ -32,6 +34,8 @@ app.use((req, res, next) => {
 app.use(express.static('public'));
 
 app.use('/user', userRoute);
+app.use('/blog', blogRoute);
+app.use('/comment', blogCommentRouter);
 
 ///////////////////////////////////////////////////////
 // 404 Handler
@@ -56,7 +60,6 @@ app.use((err: Error, req: Request, res: Response, next: () => any) => {
 
 AppDataSource.initialize().then(() => {
     // DB init ok.
-
     app.listen(SERVER_PORT, () => {
         console.log(`Server started on port ${SERVER_PORT}.`);
     });

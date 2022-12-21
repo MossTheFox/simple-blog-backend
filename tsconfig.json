@@ -13,6 +13,7 @@
       "sourceMap": true,
       "esModuleInterop": true,
       "strict": true,
-      "strictPropertyInitialization": false
+      "strictPropertyInitialization": false,
+      "forceConsistentCasingInFileNames": true, /* Ensure that casing is correct in imports. */
    }
 }

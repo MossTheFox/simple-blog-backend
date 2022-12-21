@@ -6,3 +6,4 @@ tmp/
 temp/
 public/user-content/*
 *.sqlite3
+out

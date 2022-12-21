@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from "typeorm";
+import { BlogUser } from "./BlogUser";
 
 @Entity()
 export class BlogPost {
@@ -8,19 +9,28 @@ export class BlogPost {
     @Column()
     authorId: number;
 
-    author: string;
+    authorProfile: BlogUser | null;
 
-    @Column('text')
+    @Column('text', {
+        default: ''
+    })
     summary: string;
 
-    @Column({ length: 200 })
+    @Column({
+        length: 200,
+        default: '无标题'
+    })
     title: string;
 
     /** Markdown */
-    @Column('text')
+    @Column('text', {
+        default: ''
+    })
     content: string;
 
-    @Column()
+    @Column({
+        default: ''
+    })
     category: string;
 
     @Column('simple-array')
@@ -32,6 +42,7 @@ export class BlogPost {
     @CreateDateColumn()
     createdAt: Date;
 
+    /** 被删除或恢复，会造成此值变化 */
     @UpdateDateColumn()
     lastModified: Date;
 

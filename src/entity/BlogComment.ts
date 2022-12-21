@@ -9,12 +9,19 @@ export class BlogComment {
     @Column()
     blogId: number;
 
+    @Column({
+        default: false
+    })
+    validated: boolean;
+
     @Column()
     userId: number;
 
-    user: BlogUser;
+    userProfile: BlogUser | null;
 
-    @Column()
+    @Column({
+        nullable: true
+    })
     replyTo: number;
 
     replyTarget: BlogComment | null;

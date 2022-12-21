@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-export const BLOG_USER_PERMISSION_FLAGS = ['ADMIN'] as const;
+export const ADMIN_FLAG = 'ADMIN';
+export const BLOG_USER_PERMISSION_FLAGS = [ADMIN_FLAG] as const;
 export type BlogUserPermissionFlag = (typeof BLOG_USER_PERMISSION_FLAGS[number])[]
 
 @Entity()
@@ -22,7 +23,7 @@ export class BlogUser {
     @Column('simple-array', {
         nullable: true
     })
-    flags: BlogUserPermissionFlag[] | null;
+    flags: string[] | null;
 
     /** Avatar Url */
     @Column({
