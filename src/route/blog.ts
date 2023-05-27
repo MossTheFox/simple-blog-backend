@@ -224,6 +224,8 @@ router.post('/', async (req, res) => {
 
         let saved = await AppDataSource.manager.save(newPost);
 
+        await refreshTagAndCatList();
+
         res.send({
             code: 'ok',
             message: '发布成功',
@@ -305,6 +307,9 @@ router.put('/', async (req, res) => {
 
         let saved = await AppDataSource.manager.save(blog);
 
+        await refreshTagAndCatList();
+
+
         res.send({
             code: 'ok',
             message: '修改成功',
@@ -377,6 +382,8 @@ router.delete('/', async (req, res) => {
         await AppDataSource.manager.softDelete(BlogPost, {
             id: blog.id
         });
+
+        await refreshTagAndCatList();
 
         res.send({
             code: 'ok',

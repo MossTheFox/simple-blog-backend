@@ -8,7 +8,7 @@ export class SiteDataRecord {
     @PrimaryColumn('text')
     type: typeof siteConfigTypes[number];
 
-    /** Might be json if is cat list or tag list */
+    /** 也可以记录 JSON 字符串 */
     @Column('text')
     data: string;
 
